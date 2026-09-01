@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import Button from '@/components/Button/Button';
 import {
   AdvancedIcon,
   DocumentIcon,
@@ -8,57 +7,43 @@ import {
   ShareIcon,
   SignIcon,
 } from '@/components/Icon/Icon';
-import Tabs from './components/Tabs/Tabs';
+import Tabs from '@/components/Tabs/Tabs';
 
 export function App() {
-  const [active, setActive] = useState(false);
+  const [activeTab, setActiveTab] = useState('document');
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    console.log('Active tab:', value);
+  };
 
   return (
-    <Tabs.List>
-      <Tabs.Item>
-        <Button
-          onClick={() => setActive((prev) => !prev)}
+    <Tabs.Root value={activeTab} onValueChange={handleTabChange}>
+      <Tabs.Content value="document">Document Scanner</Tabs.Content>
+      <Tabs.Content value="sign">Sign & Stamp</Tabs.Content>
+      <Tabs.Content value="batch">Batch Scanning</Tabs.Content>
+      <Tabs.Content value="advanced">Advanced Filters</Tabs.Content>
+      <Tabs.Content value="export">Export & Share</Tabs.Content>
+
+      <Tabs.List>
+        <Tabs.Item
+          value="document"
           text="Document Scanner"
           prefix={<DocumentIcon />}
-          active={active}
         />
-      </Tabs.Item>
-
-      <Tabs.Item>
-        <Button
-          onClick={() => setActive((prev) => !prev)}
-          text="Sign & Stamp"
-          prefix={<SignIcon />}
-          active={active}
-        />
-      </Tabs.Item>
-
-      <Tabs.Item>
-        <Button
-          onClick={() => setActive((prev) => !prev)}
-          text="Batch Scanning"
-          prefix={<ScanIcon />}
-          active={active}
-        />
-      </Tabs.Item>
-
-      <Tabs.Item>
-        <Button
-          onClick={() => setActive((prev) => !prev)}
+        <Tabs.Item value="sign" text="Sign & Stamp" prefix={<SignIcon />} />
+        <Tabs.Item value="batch" text="Batch Scanning" prefix={<ScanIcon />} />
+        <Tabs.Item
+          value="advanced"
           text="Advanced Filters"
           prefix={<AdvancedIcon />}
-          active={active}
         />
-      </Tabs.Item>
-
-      <Tabs.Item>
-        <Button
-          onClick={() => setActive((prev) => !prev)}
+        <Tabs.Item
+          value="export"
           text="Export & Share"
           prefix={<ShareIcon />}
-          active={active}
         />
-      </Tabs.Item>
-    </Tabs.List>
+      </Tabs.List>
+    </Tabs.Root>
   );
 }

@@ -1,25 +1,28 @@
-import type { ReactNode } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-import styles from './Button.module.scss';
 import classNames from 'classnames';
 
-interface ButtonProps {
+import styles from './Button.module.scss';
+
+export interface ButtonProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'> {
   text: string;
-  onClick: () => void;
   prefix?: ReactNode;
   active?: boolean;
 }
 
 export default function Button({
   text,
-  onClick,
   prefix,
   active = false,
+  className,
+  ...rest
 }: ButtonProps) {
   return (
     <button
-      className={styles.button}
-      onClick={onClick}
+      type="button"
+      {...rest}
+      className={classNames(styles.button, className)}
       data-active={active || undefined}
       aria-busy={active || undefined}
     >
