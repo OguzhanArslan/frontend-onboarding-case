@@ -12,13 +12,19 @@
   align-items: center;
   justify-content: center;
 
+  width: 100%;
   padding: 34px 50px;
 
   font-size: 20px;
   font-weight: var(--font-weight-medium);
+  white-space: nowrap;
 
   background-color: var(--color-white);
-  border: 0;
+  border: 2px transparent solid;
+
+  &:not([data-active]):hover {
+    border-color: var(--color-blue);
+  }
 
   .prefix {
     position: relative;
@@ -28,12 +34,14 @@
     justify-content: center;
 
     width: 56px;
+    min-width: 56px;
     height: 56px;
+    min-height: 56px;
 
     color: var(--color-gray);
 
     background-color: var(--color-white);
-    border: 1px var(--color-prefix-border) solid;
+    border: 1px var(--color-gray-border) solid;
     border-radius: 50%;
 
     &.active::before {
