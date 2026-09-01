@@ -1,13 +1,20 @@
-import styles from './App.module.scss';
+import { useState } from 'react';
+
+import styles from '@/App.module.scss';
+import Button from '@/components/Button/Button';
+import { DocumentIcon } from '@/components/Icon/Icon';
 
 export function App() {
-  return (
-    <>
-      <header>
-        <h1>HubX Frontend Assignment</h1>
-      </header>
+  const [active, setActive] = useState(false);
 
-      <main className={styles.main}></main>
-    </>
+  return (
+    <main className={styles.main}>
+      <Button
+        onClick={() => setActive((prev) => !prev)}
+        text="Document Scanner"
+        prefix={<DocumentIcon />}
+        active={active}
+      />
+    </main>
   );
 }

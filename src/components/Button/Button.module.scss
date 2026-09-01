@@ -1,0 +1,39 @@
+.button {
+  cursor: pointer;
+
+  display: inline-flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 34px 50px;
+
+  font-size: 20px;
+  font-weight: var(--font-weight-medium);
+
+  background-color: var(--color-white);
+  border: 0;
+
+  .prefix {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 56px;
+    height: 56px;
+
+    color: var(--color-gray);
+
+    background-color: var(--color-white);
+    border: 1px var(--color-prefix-border) solid;
+    border-radius: 50%;
+  }
+
+  &[data-active] {
+    background-color: var(--color-button-active);
+
+    .prefix {
+      color: var(--color-blue);
+    }
+  }
+}
