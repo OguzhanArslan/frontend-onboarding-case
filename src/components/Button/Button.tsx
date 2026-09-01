@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react';
 
 import styles from './Button.module.scss';
+import classNames from 'classnames';
 
 interface ButtonProps {
   text: string;
   onClick: () => void;
   prefix?: ReactNode;
-  /** Active/busy state: changes background and shows a loading spinner. */
   active?: boolean;
 }
 
@@ -23,7 +23,15 @@ export default function Button({
       data-active={active || undefined}
       aria-busy={active || undefined}
     >
-      {prefix && <span className={styles.prefix}>{prefix}</span>}
+      {prefix && (
+        <span
+          className={classNames(styles.prefix, {
+            [styles.active]: active,
+          })}
+        >
+          {prefix}
+        </span>
+      )}
       {text}
     </button>
   );
