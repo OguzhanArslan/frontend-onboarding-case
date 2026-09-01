@@ -1,35 +1,12 @@
-import { createContext, useCallback, useContext, useId, useState } from 'react';
-import type { KeyboardEvent, ReactNode } from 'react';
+import { useCallback, useId, useState } from 'react';
+import type { ReactNode } from 'react';
 
 import Button, { type ButtonProps } from '@/components/Button/Button';
 
 import styles from './Tabs.module.scss';
-
-type TabsContextValue = {
-  value: string;
-  setValue: (value: string) => void;
-  baseId: string;
-};
-
-const TabsContext = createContext<TabsContextValue | null>(null);
-
-function useTabsContext() {
-  const context = useContext(TabsContext);
-  if (!context) {
-    throw new Error('Tabs.* components must be used within <Tabs.Root>.');
-  }
-  return context;
-}
-
-const ID_TYPE = {
-  tab: 'tab',
-  panel: 'panel',
-} as const;
-
-const tabId = (baseId: string, value: string) =>
-  `${baseId}-${ID_TYPE.tab}-${value}`;
-const panelId = (baseId: string, value: string) =>
-  `${baseId}-${ID_TYPE.panel}-${value}`;
+import { TabsContext, useTabsContext } from './TabsContext';
+import { ID_TYPE, getElementId } from './tabsIds';
+import { useTabKeyboardNavigation } from './useTabKeyboardNavigation';
 
 type RootProps = {
   children: ReactNode;
@@ -69,48 +46,7 @@ function Root({
 }
 
 function List({ children }: { children: ReactNode }) {
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    const keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
-    if (!keys.includes(event.key)) {
-      return;
-    }
-
-    const tabs = Array.from(
-      event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]'),
-    );
-
-    const currentIndex = tabs.findIndex(
-      (tab) => tab === document.activeElement,
-    );
-
-    if (currentIndex === -1) {
-      return;
-    }
-
-    event.preventDefault();
-
-    let nextIndex = currentIndex;
-
-    if (event.key === 'ArrowRight') {
-      nextIndex = (currentIndex + 1) % tabs.length;
-    }
-
-    if (event.key === 'ArrowLeft') {
-      nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
-    }
-
-    if (event.key === 'Home') {
-      nextIndex = 0;
-    }
-
-    if (event.key === 'End') {
-      nextIndex = tabs.length - 1;
-    }
-
-    const nextTab = tabs[nextIndex];
-    nextTab?.focus();
-    nextTab?.click();
-  };
+  const handleKeyDown = useTabKeyboardNavigation();
 
   return (
     <div
@@ -137,9 +73,9 @@ function Item({ value, ...buttonProps }: ItemProps) {
         active={selected}
         onClick={() => setValue(value)}
         role="tab"
-        id={tabId(baseId, value)}
+        id={getElementId({ baseId, type: ID_TYPE.tab, value })}
         aria-selected={selected}
-        aria-controls={panelId(baseId, value)}
+        aria-controls={getElementId({ baseId, type: ID_TYPE.panel, value })}
         tabIndex={selected ? 0 : -1}
       />
     </div>
@@ -159,8 +95,8 @@ function Content({ value, children }: ContentProps) {
     <div
       className={styles.content}
       role="tabpanel"
-      id={panelId(baseId, value)}
-      aria-labelledby={tabId(baseId, value)}
+      id={getElementId({ baseId, type: ID_TYPE.panel, value })}
+      aria-labelledby={getElementId({ baseId, type: ID_TYPE.tab, value })}
       tabIndex={0}
     >
       {children}
