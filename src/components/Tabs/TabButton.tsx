@@ -1,0 +1,37 @@
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+
+import classNames from 'classnames';
+
+import styles from './TabButton.module.scss';
+
+export interface TabButtonProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'> {
+  text: string;
+  prefix?: ReactNode;
+  active?: boolean;
+}
+
+export default function TabButton(props: TabButtonProps) {
+  const { text, prefix, active = false, className, ...rest } = props;
+
+  return (
+    <button
+      type="button"
+      {...rest}
+      className={classNames(styles.button, className)}
+      data-active={active || undefined}
+      aria-busy={active || undefined}
+    >
+      {prefix && (
+        <span
+          className={classNames(styles.prefix, {
+            [styles.active]: active,
+          })}
+        >
+          {prefix}
+        </span>
+      )}
+      {text}
+    </button>
+  );
+}

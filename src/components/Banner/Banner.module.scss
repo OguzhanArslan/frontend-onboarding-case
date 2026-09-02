@@ -4,11 +4,10 @@
   overflow: hidden;
   display: flex;
   flex-direction: column-reverse;
-  gap: 32px;
   align-items: center;
 
   width: 100%;
-  max-width: 1242px;
+  max-width: 1290px;
   margin: 0 auto;
   padding: 0 24px;
 
@@ -37,9 +36,6 @@
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-
   width: 100%;
   max-width: 556px;
   padding-top: 56px;

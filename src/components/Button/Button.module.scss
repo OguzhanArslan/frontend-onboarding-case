@@ -1,91 +1,27 @@
-@property --fill-angle {
-  inherits: false;
-  initial-value: 0deg;
-  syntax: '<angle>';
-}
+@use '../../assets/scss/breakpoints' as *;
 
 .button {
   cursor: pointer;
 
-  display: inline-flex;
-  gap: 16px;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
 
-  width: 100%;
-  padding: 34px 14px;
+  padding: 10px 16px;
 
-  font-size: 20px;
-  font-weight: var(--font-weight-medium);
-  white-space: nowrap;
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  line-height: 100%;
+  color: var(--color-dark);
+  letter-spacing: 0;
 
-  background-color: var(--color-white);
-  border: 2px transparent solid;
+  background-color: transparent;
+  border: 1px solid var(--color-gray-border);
 
-  &:not([data-active]):hover {
-    border-color: var(--color-blue);
-  }
-
-  .prefix {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 56px;
-    min-width: 56px;
-    height: 56px;
-    min-height: 56px;
-
-    color: var(--color-gray);
-
-    background-color: var(--color-white);
-    border: 1px var(--color-gray-border) solid;
-    border-radius: 50%;
-
-    &.active::before {
-      content: '';
-
-      position: absolute;
-      inset: -1px;
-      transform: scaleX(-1);
-
-      background: conic-gradient(
-        var(--color-blue) var(--fill-angle),
-        transparent 0
-      );
-      border-radius: 50%;
-
-      mask: radial-gradient(
-        farthest-side,
-        transparent calc(100% - 2.5px),
-        var(--color-black) calc(100% - 1.5px)
-      );
-
-      animation: fill-ring 0.4s linear forwards;
-    }
-  }
-
-  &[data-active] {
+  &:hover {
     background-color: var(--color-button-active);
-
-    .prefix {
-      color: var(--color-blue);
-    }
   }
-}
 
-@keyframes fill-ring {
-  to {
-    --fill-angle: 360deg;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .prefix.active::before {
-    --fill-angle: 360deg;
-
-    animation: none;
+  @media (min-width: $md) {
+    padding: 15px 20px;
+    font-size: 20px;
   }
 }

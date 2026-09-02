@@ -3,9 +3,8 @@ import type { ReactNode, TransitionEvent } from 'react';
 
 import classNames from 'classnames';
 
-import Button, { type ButtonProps } from '@/components/Button/Button';
-
 import styles from './Tabs.module.scss';
+import TabButton, { type TabButtonProps } from './TabButton';
 import { TabsContext, useTabsContext } from './TabsContext';
 import { ID_TYPE, getElementId } from './tabsIds';
 import { useTabKeyboardNavigation } from './useTabKeyboardNavigation';
@@ -65,7 +64,7 @@ function List(props: { children: ReactNode }) {
   );
 }
 
-type ItemProps = { value: string } & Omit<ButtonProps, 'onClick' | 'active'>;
+type ItemProps = { value: string } & Omit<TabButtonProps, 'onClick' | 'active'>;
 
 function Item(props: ItemProps) {
   const { value, ...buttonProps } = props;
@@ -74,7 +73,7 @@ function Item(props: ItemProps) {
 
   return (
     <div className={styles.item}>
-      <Button
+      <TabButton
         {...buttonProps}
         active={selected}
         onClick={() => setValue(value)}

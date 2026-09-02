@@ -1,3 +1,4 @@
+import Button from '../Button/Button';
 import styles from './Banner.module.scss';
 
 interface BannerProps {
@@ -17,6 +18,8 @@ export default function Banner(props: BannerProps) {
         <h2 className={styles.label}>{label}</h2>
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.description}>{description}</p>
+
+        <Button>Learn More</Button>
       </div>
     </div>
   );
