@@ -2,16 +2,16 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import styles from './TabButton.module.scss';
+import styles from './PillButton.module.scss';
 
-export interface TabButtonProps
+export interface PillButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'> {
   text: string;
   prefix?: ReactNode;
   active?: boolean;
 }
 
-export default function TabButton(props: TabButtonProps) {
+export default function PillButton(props: PillButtonProps) {
   const { text, prefix, active = false, className, ...rest } = props;
 
   return (
