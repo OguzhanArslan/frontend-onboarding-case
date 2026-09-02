@@ -11,13 +11,9 @@ export interface ButtonProps
   active?: boolean;
 }
 
-export default function Button({
-  text,
-  prefix,
-  active = false,
-  className,
-  ...rest
-}: ButtonProps) {
+export default function Button(props: ButtonProps) {
+  const { text, prefix, active = false, className, ...rest } = props;
+
   return (
     <button
       type="button"

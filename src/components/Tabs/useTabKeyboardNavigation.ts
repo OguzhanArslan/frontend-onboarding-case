@@ -5,12 +5,14 @@ const NAVIGATION_KEYS = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
 
 export function useTabKeyboardNavigation() {
   return useCallback((event: KeyboardEvent<HTMLDivElement>) => {
-    if (!NAVIGATION_KEYS.includes(event.key)) {
+    const { key, currentTarget } = event;
+
+    if (!NAVIGATION_KEYS.includes(key)) {
       return;
     }
 
     const tabs = Array.from(
-      event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]'),
+      currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]'),
     );
 
     const currentIndex = tabs.findIndex(
@@ -25,19 +27,19 @@ export function useTabKeyboardNavigation() {
 
     let nextIndex = currentIndex;
 
-    if (event.key === 'ArrowRight') {
+    if (key === 'ArrowRight') {
       nextIndex = (currentIndex + 1) % tabs.length;
     }
 
-    if (event.key === 'ArrowLeft') {
+    if (key === 'ArrowLeft') {
       nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
     }
 
-    if (event.key === 'Home') {
+    if (key === 'Home') {
       nextIndex = 0;
     }
 
-    if (event.key === 'End') {
+    if (key === 'End') {
       nextIndex = tabs.length - 1;
     }
 

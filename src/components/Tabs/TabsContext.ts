@@ -1,10 +1,10 @@
 import { createContext, useContext } from 'react';
 
-export type TabsContextValue = {
+export interface TabsContextValue {
   value: string;
   setValue: (value: string) => void;
   baseId: string;
-};
+}
 
 export const TabsContext = createContext<TabsContextValue | null>(null);
 

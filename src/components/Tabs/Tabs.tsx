@@ -1,5 +1,7 @@
-import { useCallback, useId, useState } from 'react';
-import type { ReactNode } from 'react';
+import { useCallback, useEffect, useId, useState } from 'react';
+import type { ReactNode, TransitionEvent } from 'react';
+
+import classNames from 'classnames';
 
 import Button, { type ButtonProps } from '@/components/Button/Button';
 
@@ -8,19 +10,21 @@ import { TabsContext, useTabsContext } from './TabsContext';
 import { ID_TYPE, getElementId } from './tabsIds';
 import { useTabKeyboardNavigation } from './useTabKeyboardNavigation';
 
-type RootProps = {
+interface RootProps {
   children: ReactNode;
   defaultValue?: string;
   value?: string;
   onValueChange?: (value: string) => void;
-};
+}
 
-function Root({
-  children,
-  defaultValue,
-  value: controlledValue,
-  onValueChange,
-}: RootProps) {
+function Root(props: RootProps) {
+  const {
+    children,
+    defaultValue,
+    value: controlledValue,
+    onValueChange,
+  } = props;
+
   const baseId = useId();
   const [uncontrolledValue, setUncontrolledValue] = useState(
     defaultValue ?? '',
@@ -45,7 +49,8 @@ function Root({
   );
 }
 
-function List({ children }: { children: ReactNode }) {
+function List(props: { children: ReactNode }) {
+  const { children } = props;
   const handleKeyDown = useTabKeyboardNavigation();
 
   return (
@@ -62,7 +67,8 @@ function List({ children }: { children: ReactNode }) {
 
 type ItemProps = { value: string } & Omit<ButtonProps, 'onClick' | 'active'>;
 
-function Item({ value, ...buttonProps }: ItemProps) {
+function Item(props: ItemProps) {
+  const { value, ...buttonProps } = props;
   const { value: activeValue, setValue, baseId } = useTabsContext();
   const selected = activeValue === value;
 
@@ -82,24 +88,51 @@ function Item({ value, ...buttonProps }: ItemProps) {
   );
 }
 
-type ContentProps = { value: string; children: ReactNode };
+interface ContentProps {
+  value: string;
+  children: ReactNode;
+}
 
-function Content({ value, children }: ContentProps) {
-  const { value: activeValue, baseId } = useTabsContext();
+function Content(props: ContentProps) {
+  const { value, children } = props;
+  const { baseId } = useTabsContext();
+  const [visible, setVisible] = useState(true);
+  const [rendered, setRendered] = useState<ContentProps>({ value, children });
+  const { value: renderedValue, children: renderedChildren } = rendered;
 
-  if (activeValue !== value) {
-    return null;
-  }
+  useEffect(() => {
+    if (value !== renderedValue) {
+      setVisible(false);
+    }
+  }, [value, renderedValue]);
+
+  const handleTransitionEnd = (event: TransitionEvent<HTMLDivElement>) => {
+    const { target, currentTarget, propertyName } = event;
+
+    if (target === currentTarget && propertyName === 'opacity' && !visible) {
+      setRendered({ value, children });
+      setVisible(true);
+    }
+  };
 
   return (
     <div
       className={styles.content}
       role="tabpanel"
-      id={getElementId({ baseId, type: ID_TYPE.panel, value })}
-      aria-labelledby={getElementId({ baseId, type: ID_TYPE.tab, value })}
+      id={getElementId({ baseId, type: ID_TYPE.panel, value: renderedValue })}
+      aria-labelledby={getElementId({
+        baseId,
+        type: ID_TYPE.tab,
+        value: renderedValue,
+      })}
       tabIndex={0}
     >
-      {children}
+      <div
+        className={classNames(styles.fade, { [styles.hidden]: !visible })}
+        onTransitionEnd={handleTransitionEnd}
+      >
+        {renderedChildren}
+      </div>
     </div>
   );
 }

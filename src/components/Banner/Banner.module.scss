@@ -1,0 +1,123 @@
+@use '../../assets/scss/breakpoints' as *;
+
+.banner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 32px;
+  align-items: center;
+
+  width: 100%;
+  max-width: 1242px;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  @media (min-width: $md) {
+    flex-direction: row;
+    gap: 76px;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.img {
+  max-width: 100%;
+  animation: rise-in 0.5s ease both;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: $md) {
+    flex: 0 1 610px;
+    min-width: 0;
+    margin-top: auto;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 556px;
+  padding-top: 56px;
+
+  text-align: center;
+
+  @media (min-width: $md) {
+    flex: 0 1 556px;
+
+    min-width: 0;
+    margin-top: 200px;
+    padding-top: 0;
+
+    text-align: right;
+  }
+}
+
+.label {
+  margin-bottom: 16px;
+
+  font-size: 16px;
+  font-weight: var(--font-weight-heavy);
+  color: var(--color-blue);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.title {
+  margin-bottom: 13px;
+
+  font-size: 32px;
+  font-weight: var(--font-weight-bold);
+  line-height: 40px;
+  color: var(--color-dark);
+
+  @media (min-width: $md) {
+    margin-bottom: 20px;
+  }
+}
+
+.description {
+  margin-bottom: 20px;
+
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  line-height: 28px;
+  color: var(--color-gray-dark);
+  letter-spacing: 0.8px;
+
+  @media (min-width: $md) {
+    margin-bottom: 32px;
+    font-size: 20px;
+    line-height: 32px;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    transform: translateY(50%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img {
+    animation-name: fade-in;
+  }
+}

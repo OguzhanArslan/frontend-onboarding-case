@@ -1,18 +1,11 @@
 .root {
   display: flex;
   flex-direction: column;
+  background-color: var(--color-white);
 }
 
 .content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 200px;
-  padding: 24px;
-
-  background-color: var(--color-white);
-  border-radius: 16px;
+  width: 100%;
 }
 
 .list {
@@ -37,4 +30,12 @@
   &:last-child {
     border-right: 0;
   }
+}
+
+.fade {
+  transition: opacity 0.3s ease;
+}
+
+.hidden {
+  opacity: 0;
 }

@@ -11,5 +11,8 @@ export interface ElementIdParams {
   value: string;
 }
 
-export const getElementId = ({ baseId, type, value }: ElementIdParams) =>
-  `${baseId}-${type}-${value}`;
+export const getElementId = (params: ElementIdParams) => {
+  const { baseId, type, value } = params;
+
+  return `${baseId}-${type}-${value}`;
+};

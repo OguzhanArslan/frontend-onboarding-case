@@ -14,15 +14,19 @@ export interface IconProps extends SVGProps<SVGSVGElement> {
 type SvgComponent = ComponentType<SVGProps<SVGSVGElement> & { title?: string }>;
 
 function createIcon(Svg: SvgComponent, displayName: string): FC<IconProps> {
-  const Icon: FC<IconProps> = ({ size = 32, ...rest }) => (
-    <Svg
-      width={size}
-      height={size}
-      focusable="false"
-      aria-hidden={rest['aria-label'] || rest.title ? undefined : true}
-      {...rest}
-    />
-  );
+  const Icon: FC<IconProps> = (props) => {
+    const { size = 32, ...rest } = props;
+
+    return (
+      <Svg
+        width={size}
+        height={size}
+        focusable="false"
+        aria-hidden={rest['aria-label'] || rest.title ? undefined : true}
+        {...rest}
+      />
+    );
+  };
 
   Icon.displayName = displayName;
 
