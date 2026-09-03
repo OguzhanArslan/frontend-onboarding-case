@@ -1,35 +1,84 @@
-# HubX Frontend Assignment
+# Onboarding Frontend Case
 
-Please implement the given design with responsive, mobile-first approach and cross-browser support and try to follow it as closely as possible. The functionality described in the Figma file needs to be implemented for this assignment to be completed successfully. Make sure to format and lint your code before submitting it.
+An onboarding screen built to match the provided Figma design — responsive, mobile-first, and cross-browser. Users switch between onboarding steps through an animated tab bar, with each tab presenting its own banner, illustration, and stickers.
 
-## Design
+**Live demo:** https://onboarding.oguzhanarslan.me/
 
-Figma design URL:
+## Tech stack
 
+- **React 18** + **TypeScript**
+- **Vite** for dev server and build
+- **SCSS Modules** for styling
+- **ESLint**, **Stylelint**, and **Prettier** for linting and formatting
+
+## Getting started
+
+Install dependencies:
+
+```sh
+npm install
 ```
-https://www.figma.com/file/fqq3IGqxAiIUEItAWHZ54W/Frontend-Case-(HubX)?type=design&node-id=896%3A263&mode=design&t=7TvYeaXudwa3TGy5-1
-```
 
-Example implementation videos:
-
-```
-https://drive.google.com/drive/folders/1kkicvHG7UMc-MY9npv_fy4gW1cZF3QiO?usp=drive_link
-```
-
-## Start development server
+Start the development server:
 
 ```sh
 npm run dev
 ```
 
-## Lint the code
+Build for production:
+
+```sh
+npm run build
+```
+
+Preview the production build:
+
+```sh
+npm run preview
+```
+
+## Linting & formatting
+
+Run all linters (ESLint, TypeScript, Stylelint):
 
 ```sh
 npm run lint
 ```
 
-## Format the code
+Format the code (Prettier + Stylelint autofix):
 
 ```sh
 npm run format
+```
+
+## Project structure
+
+```
+src/
+├── App.tsx                 # Composes the Tabs + Banner for each onboarding step
+├── main.tsx                # App entry point
+├── styles.scss             # Global styles
+├── assets/
+│   ├── fonts/              # SF Pro Display font files
+│   ├── icons/              # Tab icons (svg)
+│   ├── images/             # Banner illustrations
+│   └── scss/               # Shared styles: variables, breakpoints, fonts, reset
+├── components/
+│   ├── Banner/             # Step banner: title, description, image, stickers
+│   ├── Button/             # Base button
+│   ├── Icon/               # Icon wrapper
+│   ├── PillButton/         # Animated pill CTA with progress ring
+│   ├── Stickers/           # Decorative stickers layered over banners
+│   └── Tabs/               # Compound Tabs component (Root, List, Tab, Panels, Panel)
+│                           #   with context, keyboard navigation, and helpers
+└── data/
+    └── tabs.ts             # Tab configuration (labels, content, icons, stickers)
+```
+
+## Design reference
+
+Figma design:
+
+```
+https://www.figma.com/file/fqq3IGqxAiIUEItAWHZ54W/Frontend-Case-(HubX)?type=design&node-id=896%3A263&mode=design&t=7TvYeaXudwa3TGy5-1
 ```
