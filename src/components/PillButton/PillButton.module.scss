@@ -54,7 +54,7 @@
         fill: none;
         stroke: var(--color-blue);
         stroke-dasharray: 173;
-        stroke-dashoffset: 173;
+        stroke-dashoffset: -173;
         stroke-width: 1;
 
         transition: stroke-dashoffset 0.4s linear;
