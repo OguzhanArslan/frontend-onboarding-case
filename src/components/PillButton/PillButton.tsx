@@ -28,8 +28,8 @@ export default function PillButton(props: PillButtonProps) {
             [styles.active]: active,
           })}
         >
-          <svg className={styles.ring} viewBox="0 0 58 58" aria-hidden="true">
-            <circle cx="29" cy="29" r="28" />
+          <svg className={styles.ring} viewBox="0 0 56 56" aria-hidden="true">
+            <circle cx="28" cy="28" r="27.5" />
           </svg>
           {prefix}
         </span>
