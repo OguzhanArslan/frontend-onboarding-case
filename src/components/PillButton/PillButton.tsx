@@ -18,7 +18,7 @@ export default function PillButton(props: PillButtonProps) {
     <button
       type="button"
       {...rest}
-      className={classNames(styles.button, className)}
+      className={classNames(styles.pillbutton, className)}
       data-active={active || undefined}
       aria-busy={active || undefined}
     >

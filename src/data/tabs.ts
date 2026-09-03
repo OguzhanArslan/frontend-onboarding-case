@@ -88,7 +88,7 @@ export const TABS = [
         bottom: '6%',
         left: '33%',
         animation: 'slide-up',
-        delay: 1.1,
+        delay: 1.2,
       },
       {
         src: Screen3Page,
@@ -96,7 +96,7 @@ export const TABS = [
         bottom: '-5%',
         left: '29.2%',
         animation: 'slide-up',
-        delay: 1.3,
+        delay: 1.4,
       },
       {
         src: Screen3Page,
@@ -104,7 +104,7 @@ export const TABS = [
         bottom: '-13%',
         left: '27%',
         animation: 'slide-up',
-        delay: 1.5,
+        delay: 1.6,
       },
     ],
   },
@@ -149,7 +149,7 @@ export const TABS = [
         bottom: '5.7%',
         left: '16.8%',
         animation: 'slide-up',
-        delay: 1.1,
+        delay: 1.2,
       },
       {
         src: Screen5Pdf,
@@ -157,7 +157,7 @@ export const TABS = [
         bottom: '0.6%',
         left: '17.8%',
         animation: 'slide-up',
-        delay: 1.3,
+        delay: 1.4,
       },
       {
         src: Screen5Jpg,
@@ -165,7 +165,7 @@ export const TABS = [
         bottom: '8%',
         left: '41%',
         animation: 'slide-up',
-        delay: 1.4,
+        delay: 1.6,
       },
       {
         src: Screen5Txt,
@@ -173,7 +173,7 @@ export const TABS = [
         bottom: '0%',
         left: '62%',
         animation: 'slide-up',
-        delay: 1.5,
+        delay: 1.8,
       },
     ],
   },
