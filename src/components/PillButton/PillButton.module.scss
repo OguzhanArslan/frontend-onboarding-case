@@ -40,13 +40,15 @@
 
     .ring {
       pointer-events: none;
+
       position: absolute;
       top: 50%;
       left: 50%;
+      transform: translate(-50%, -50%) rotate(-90deg);
+
       width: 56px;
       max-width: none;
       height: 56px;
-      transform: translate(-50%, -50%) rotate(-90deg);
 
       circle {
         fill: none;

@@ -1,4 +1,4 @@
-import { useCallback, useId, useState } from 'react';
+import { useCallback, useId, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 
 import PillButton, { type PillButtonProps } from '@/components/PillButton';
@@ -69,13 +69,23 @@ function Tab(props: TabProps) {
   const { value, ...buttonProps } = props;
   const { value: activeValue, setValue, baseId } = useTabsContext();
   const selected = activeValue === value;
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleClick = () => {
+    setValue(value);
+    ref.current?.scrollIntoView({
+      behavior: 'smooth',
+      inline: 'start',
+      block: 'nearest',
+    });
+  };
 
   return (
-    <div className={styles.tab}>
+    <div className={styles.tab} ref={ref}>
       <PillButton
         {...buttonProps}
         active={selected}
-        onClick={() => setValue(value)}
+        onClick={handleClick}
         role="tab"
         id={getElementId({ baseId, type: ID_TYPE.tab, value })}
         aria-selected={selected}
