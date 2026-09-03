@@ -29,25 +29,30 @@ export default function Stickers(props: StickersProps) {
 
   return (
     <>
-      {items.map((sticker, index) => (
-        <img
-          key={index}
-          src={sticker.src}
-          alt={sticker.alt ?? ''}
-          className={styles.sticker}
-          data-anim={sticker.animation ?? 'pop'}
-          style={
-            {
-              top: sticker.top,
-              left: sticker.left,
-              right: sticker.right,
-              bottom: sticker.bottom,
-              width: sticker.width,
-              '--sticker-delay': `${sticker.delay ?? 0}s`,
-            } as CSSProperties
-          }
-        />
-      ))}
+      {items.map((sticker, index) => {
+        const { animation, delay, src, alt, top, bottom, left, right, width } =
+          sticker;
+
+        return (
+          <img
+            key={index}
+            src={src}
+            alt={alt ?? ''}
+            className={styles.sticker}
+            data-anim={animation ?? 'pop'}
+            style={
+              {
+                top,
+                left,
+                right,
+                bottom,
+                width,
+                '--sticker-delay': `${delay ?? 0}s`,
+              } as CSSProperties
+            }
+          />
+        );
+      })}
     </>
   );
 }

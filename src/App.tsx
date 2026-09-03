@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import Banner from '@/components/Banner';
 import Tabs from '@/components/Tabs';
-import { TABS, type TabConfig, type TabValue } from '@/data/tabs';
+import { TABS_DATA, type TabConfig, type TabValue } from '@/data/tabs';
 
 export function App() {
-  const [activeTab, setActiveTab] = useState<TabValue>(TABS[0].value);
+  const [activeTab, setActiveTab] = useState<TabValue>(TABS_DATA[0].value);
 
   return (
     <Tabs.Root
@@ -13,7 +13,7 @@ export function App() {
       onValueChange={(value) => setActiveTab(value as TabValue)}
     >
       <Tabs.Panels>
-        {TABS.map(
+        {TABS_DATA.map(
           ({
             value,
             label,
@@ -36,7 +36,7 @@ export function App() {
       </Tabs.Panels>
 
       <Tabs.List>
-        {TABS.map(({ value, label, Icon }) => (
+        {TABS_DATA.map(({ value, label, Icon }) => (
           <Tabs.Tab key={value} value={value} text={label} prefix={<Icon />} />
         ))}
       </Tabs.List>

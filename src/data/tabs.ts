@@ -36,7 +36,7 @@ export interface TabConfig {
   stickers?: readonly Sticker[];
 }
 
-export const TABS = [
+export const TABS_DATA = [
   {
     value: 'document',
     label: 'Document Scanner',
@@ -179,4 +179,4 @@ export const TABS = [
   },
 ] as const satisfies readonly TabConfig[];
 
-export type TabValue = (typeof TABS)[number]['value'];
+export type TabValue = (typeof TABS_DATA)[number]['value'];
