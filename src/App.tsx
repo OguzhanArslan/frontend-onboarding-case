@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
+import Banner from '@/components/Banner';
 import Tabs from '@/components/Tabs';
 import { TABS, type TabConfig, type TabValue } from '@/data/tabs';
-import Banner from './components/Banner/Banner';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<TabValue>(TABS[0].value);

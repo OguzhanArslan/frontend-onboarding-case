@@ -13,16 +13,24 @@
   display: grid;
   grid-area: 1 / 1;
   visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.15s ease-out,
+    visibility 0s linear 0.15s;
 
   &[data-active] {
     visibility: visible;
+    opacity: 1;
+    transition:
+      opacity 0.1s ease-in 0.4s,
+      visibility 0s;
 
     [data-banner-image] {
-      animation: rise-in 1s ease-in-out 0.1s both;
+      animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
     }
 
     [data-banner-content] {
-      animation: fade-in 1s ease-in-out both;
+      animation: fade-in 0.1s ease-in 0.4s both;
     }
   }
 }
@@ -72,6 +80,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .panel[data-active] [data-banner-image],
   .panel[data-active] [data-banner-content] {
     animation: none;

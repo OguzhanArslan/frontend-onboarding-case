@@ -17,14 +17,14 @@ import Screen5Txt from '@/assets/images/screen5/txt.png';
 
 import type { Sticker } from '@/components/Stickers';
 
-import type { IconProps } from '@/components/Icon/Icon';
+import type { IconProps } from '@/components/Icon';
 import {
   AdvancedIcon,
   DocumentIcon,
   ScanIcon,
   ShareIcon,
   SignIcon,
-} from '@/components/Icon/Icon';
+} from '@/components/Icon';
 
 export interface TabConfig {
   value: string;

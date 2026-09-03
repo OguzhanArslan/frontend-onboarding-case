@@ -1,6 +1,6 @@
+import Button from '@/components/Button';
 import Stickers, { type Sticker } from '@/components/Stickers';
 
-import Button from '../Button/Button';
 import styles from './Banner.module.scss';
 
 interface BannerProps {
